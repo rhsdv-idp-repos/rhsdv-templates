@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: automotive-collection
+  description: A collection of example software templates to build Red Hat In-Vehicle OS
+spec:
+  type: url
+  targets:
+    - templates/sample/template.yaml
