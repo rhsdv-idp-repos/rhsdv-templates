@@ -196,7 +196,7 @@ spec:
           verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
 
     - id: publish
-      name: Publish
+      name: Publish Source
       action: publish:gitlab
       input:
         repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.artifact_id}}"
@@ -243,12 +243,12 @@ spec:
         targetPath: ./tenant-gitops
 
     - id: publish-gitops
-      name: Publishing to Resource Repository
+      name: Publishing GitOps Code
       action: publish:gitlab
       input:
-        repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.artifact_id}}' }}-gitops"
-        title: gitops resources for {{ '${{ parameters.artifact_id }}' }}
-        description: gitops resources for {{ '${{ parameters.artifact_id }}' }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.artifact_id}}-gitops"
+        title: gitops resources for ${{ parameters.artifact_id }}
+        description: gitops resources for ${{ parameters.artifact_id }}
         sourcePath: ./tenant-gitops
         repoVisibility: public
 
