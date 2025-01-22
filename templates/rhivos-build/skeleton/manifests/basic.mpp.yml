@@ -1,6 +1,6 @@
 version: '2'
 mpp-vars:
-  name: {{ build_name }}
+  name: ${{values.artifact_id}}
   ssh_permit_password_auth: {{ mpp_vars.ssh_permit_password_auth }}
   ssh_permit_root_login: {{ mpp_vars.ssh_permit_root_login }}
   root_ssh_key: {{ ssh_public_key }}
