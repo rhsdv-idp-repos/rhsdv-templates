@@ -217,7 +217,6 @@ spec:
         copyWithoutTemplating: []
         values:
           artifact_id: ${{ parameters.artifact_id }}
-          #component_id: {{ '${{ parameters.artifact_id }}' }}
           description: {{ '${{ parameters.description }}' }}
           manifest_name: ${{ parameters.manifest_name }}
           manifest_location: ${{ parameters.manifest_location }}
@@ -227,18 +226,17 @@ spec:
           mode: ${{ parameters.mode }}
           export_format: ${{ parameters.export_format }}
 
-          destination: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.artifact_id}}' }}-gitops.git
-          source_repository: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.artifact_id}}' }}.git
-          repository_name: {{ '${{parameters.artifact_id}}' }}
-          repository_host: {{ '${{ parameters.repo.host }}' }}
-          git_owner: {{ '${{ parameters.repo.owner }}' }}
+          destination: "https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.artifact_id}}-gitops.git"
+          source_repository: "https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.artifact_id}}.git"
+          repository_name: ${{parameters.artifact_id}}
+          repository_host: ${{ parameters.repo.host }}
+          git_owner: ${{ parameters.repo.owner }}
 
           cluster: ${{ parameters.base_domain }}
-          #namespace: {{ '${{ parameters.component_id }}' }}-build
-          user: {{ '${{ user.entity.metadata.name }}' }}
+          user: ${{ user.entity.metadata.name }}
           deployment_name: rhivos-build-template
           
-          verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
+          verify_commits: ${{ parameters.repo.verify_commits }}
           
         targetPath: ./tenant-gitops
 
@@ -256,6 +254,8 @@ spec:
     links:
       - title: Source Code Repository
         url: ${{ steps.publish.output.remoteUrl }}
+      - title: GitOps Code Repository
+        url: ${{ steps.publish-gitops.output.remoteUrl }}
       - title: Open Component in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
