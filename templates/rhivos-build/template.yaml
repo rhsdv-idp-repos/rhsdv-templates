@@ -11,16 +11,11 @@ spec:
   type: service
 
   parameters:
-    - title: Provide RHIVOS Build Information
+    - title: Provide Project Information
       required:
         - artifact_id
         - manifest_name
         - manifest_location
-        - distro
-        - arch
-        - target
-        - mode
-        - export_format
       properties:
         artifact_id:
           title: Artifact Id
@@ -46,7 +41,15 @@ spec:
           type: string
           default: ./manifests
           description: Manifest file location
-
+    
+    - title: Provide RHIVOS Build Information
+      required:
+        - distro
+        - arch
+        - target
+        - mode
+        - export_format
+      properties:
         distro:
           title: Distro
           type: string
