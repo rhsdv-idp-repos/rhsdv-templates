@@ -195,7 +195,8 @@ spec:
           target: ${{ parameters.target }}
           mode: ${{ parameters.mode }}
           export_format: ${{ parameters.export_format }}
-          verify_commits: { { "${{ parameters.repo.verify_commits }}" } }
+          verify_commits: "${{ parameters.repo.verify_commits }}"
+          quay_destination: ${{ parameters.image_organization}}/${{ parameters.artifact_id }}
 
     - id: publish
       name: Publish Source
@@ -256,7 +257,7 @@ spec:
       name: Create GitOps Resources
       action: argocd:create-resources
       input:
-        appName: "${{ parameters.artifact_id }}-build"
+        appName: "${{ parameters.artifact_id }}-bootstrap"
         argoInstance: main
         namespace: janus-argocd
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.artifact_id }}-gitops.git
@@ -266,8 +267,6 @@ spec:
     links:
       - title: Source Code Repository
         url: ${{ steps.publish.output.remoteUrl }}
-      - title: GitOps Code Repository
-        url: ${{ steps.publish-gitops.output.remoteUrl }}
       - title: Open Component in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}

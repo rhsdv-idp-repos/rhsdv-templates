@@ -6,13 +6,13 @@ metadata:
   description: ${{values.description | dump}}
   {%- endif %}
   annotations:
-    #argocd/app-selector: rht-gitops.com/janus-argocd=${{values.artifact_id}}-bootstrap
+    argocd/app-selector: rht-gitops.com/janus-argocd=${{values.artifact_id}}-bootstrap
     backstage.io/kubernetes-id: ${{values.artifact_id}}
     janus-idp.io/tekton: ${{values.artifact_id}}
     backstage.io/source-location: url:https://${{values.host}}/${{values.destination}}
-    #backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
+    backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
     gitlab.com/project-slug: ${{values.destination}}
-    #quay.io/repository-slug: ${{values.quay_destination | dump}}
+    quay.io/repository-slug: ${{values.quay_destination | dump}}
   tags:
     - automotive
     - rhivos
