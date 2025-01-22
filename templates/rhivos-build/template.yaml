@@ -9,36 +9,39 @@ metadata:
 spec:
   owner: automotive
   type: service
+
   parameters:
     - title: Provide basic information for the build
       required:
+        - artifact_id
         - manifest_name
         - manifest_location
-        - artifact_id
       properties:
-        manifest_name:
-          title: Manifest
-          type: string
-          description: Name of the manifest file
-          default: devel
-          #ui:field: EntityNamePicker
-          maxLength: 40
-        manifest_location:
-          title: Location
-          type: string
-          default: ./manifests
-          description: Manifest file location
         artifact_id:
           title: Artifact Id
           type: string
           default: devel-build
           description: RHIVOS Artifact Id
+          maxLength: 40
+          pattern: "^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$"
         description:
           title: Description
           type: string
           description: Help others understand what this RHIVOS build is for.
           default: RHIVOS development image
-    
+        manifest_name:
+          title: Manifest
+          type: string
+          description: Name of the manifest file
+          default: devel
+          maxLength: 40
+          pattern: "^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$"
+        manifest_location:
+          title: Location
+          type: string
+          default: ./manifests
+          description: Manifest file location
+
     - title: Build parameters
       required:
         - distro
@@ -69,14 +72,14 @@ spec:
             - rpi4
             - qemu
         mode:
-          title: Target
+          title: Package Mode
           type: string
           default: package
           enum:
             - package
             - image
         export_format:
-          title: Target
+          title: Export Format
           type: string
           default: image
           enum:
@@ -94,6 +97,7 @@ spec:
           type: string
           description: Base domain of the cluster, e.g. cluster-zgzkk.zgzkk.sandbox2007.opentlc.com
           default: cluster-...
+          ui:help: 'Hint: find the base domain in the URL above'
         repo:
           title: Repository Location
           type: object

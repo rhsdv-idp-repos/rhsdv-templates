@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: automotive
-  description: Red Hat Automotive Sample Team
+  description: Red Hat Automotive Samples
 spec:
   type: team
   profile:

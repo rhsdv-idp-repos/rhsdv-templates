@@ -7,4 +7,4 @@ spec:
   type: url
   targets:
     - templates/rhivos-build/template.yaml
-    - templates/sample/template.yaml
+    #- templates/sample/template.yaml
