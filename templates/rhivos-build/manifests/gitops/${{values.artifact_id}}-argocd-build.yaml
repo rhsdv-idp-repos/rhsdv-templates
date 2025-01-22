@@ -18,7 +18,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: ${{ values.artifact_id }}-build
   ignoreDifferences:
-    - group: '*'
+    - group: "*"
       jqPathExpressions:
         - '.imagePullSecrets[] | select(.name | contains("-dockercfg-"))'
       kind: ServiceAccount
@@ -27,8 +27,8 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
-    - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
     retry:
       limit: -1
       backoff:
