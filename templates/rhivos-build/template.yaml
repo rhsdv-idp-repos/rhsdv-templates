@@ -93,6 +93,7 @@ spec:
         - repo
         - verify_commits
       properties:
+        title: Cluster Information
         base_domain:
           title: Cluster Base Domain
           type: string
@@ -203,6 +204,7 @@ spec:
       action: publish:gitlab
       input:
         repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.artifact_id}}"
+        defaultBranch: main
         repoVisibility: public
 
     - id: register
@@ -254,9 +256,8 @@ spec:
       action: publish:gitlab
       input:
         repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.artifact_id}}-gitops"
-        title: gitops resources for ${{ parameters.artifact_id }}
-        description: gitops resources for ${{ parameters.artifact_id }}
         sourcePath: ./tenant-gitops
+        defaultBranch: main
         repoVisibility: public
 
     - id: create-gitops-resources
