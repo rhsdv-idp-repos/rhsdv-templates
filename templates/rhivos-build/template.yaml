@@ -243,7 +243,7 @@ spec:
           image_name: ${{ parameters.artifact_id }}
           image_tag: ${{ parameters.image_tag }}
 
-          cluster: ${{ parameters.base_domain }}
+          cluster: .apps.${{ parameters.base_domain }}
           user: ${{ user.entity.metadata.name }}
           deployment_name: rhivos-build-template
 
