@@ -235,6 +235,12 @@ spec:
           repository_host: ${{ parameters.repo.host }}
           git_owner: ${{ parameters.repo.owner }}
 
+          image_registry: ${{ parameters.image_registry }}
+          image_host: ${{ parameters.image_host }}
+          image_organization: ${{ parameters.image_organization }}
+          image_name: ${{ parameters.artifact_id }}
+          image_tag: ${{ parameters.image_tag }}
+
           cluster: ${{ parameters.base_domain }}
           user: ${{ user.entity.metadata.name }}
           deployment_name: rhivos-build-template
