@@ -93,7 +93,6 @@ spec:
         - repo
         - verify_commits
       properties:
-        title: Cluster Information
         base_domain:
           title: Cluster Base Domain
           type: string
