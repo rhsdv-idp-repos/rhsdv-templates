@@ -1,11 +1,11 @@
 app:
-  baseUrl: https://backstage-developer-hub-backstage.apps.{{ cluster_base_domain }}
+  baseUrl: https://backstage-developer-hub-backstage.{{ cluster_apps_domain }}
 argocd:
   appLocatorMethods:
   - instances:
     - name: main
       password: {{ cluster_generic_password }}
-      url: https://argocd-server-janus-argocd.apps.{{ cluster_base_domain }}
+      url: https://argocd-server-janus-argocd.{{ cluster_apps_domain }}
       username: admin
     type: config
 auth:
@@ -21,7 +21,7 @@ backend:
       type: static
     keys:
     - secret: ${BACKEND_SECRET}
-  baseUrl: https://backstage-developer-hub-backstage.apps.{{ cluster_base_domain }}
+  baseUrl: https://backstage-developer-hub-backstage.{{ cluster_apps_domain }}
   cors:
     credentials: true
     methods:
@@ -29,7 +29,7 @@ backend:
     - POST
     - PUT
     - DELETE
-    origin: https://backstage-backstage.apps.{{ cluster_base_domain }}
+    origin: https://backstage-backstage.{{ cluster_apps_domain }}
   csp:
     connect-src:
     - '''self'''
@@ -59,19 +59,19 @@ backend:
     port: 7007
   reading:
     allow:
-    - host: '*.apps.{{ cluster_base_domain }}'
+    - host: '*.{{ cluster_apps_domain }}'
 catalog:
   locations:
   - rules:
     - allow:
       - Template
-    target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/showcase-templates.yaml
+    target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/showcase-templates.yaml
     type: url
   - rules:
     - allow:
       - Group
       - User
-    target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/org.yaml
+    target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/org.yaml
     type: url
   - rules:
     - allow:
@@ -81,23 +81,23 @@ catalog:
       - Resource
       - Location
       - Template
-    target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/catalogs.yaml
+    target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/catalogs.yaml
     type: url
   #- rules:
   #  - allow:
   #      - Template
-  #  target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/rhdh/rhsdv-templates/blob/main/templates.yaml
+  #  target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/rhsdv-templates/blob/main/templates.yaml
   #  type: url
   #- rules:
   #  - allow:
   #      - Group
   #      - User
-  #  target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/rhdh/rhsdv-templates/blob/main/org.yaml
+  #  target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/rhsdv-templates/blob/main/org.yaml
   #  type: url
   providers:
     gitlab:
       selfHosted:
-        host: gitlab-gitlab.apps.{{ cluster_base_domain }}
+        host: gitlab-gitlab.{{ cluster_apps_domain }}
         schedule:
           frequency:
             seconds: 10
@@ -136,14 +136,14 @@ enabled:
   techdocs: true
 integrations:
   gitlab:
-  - apiBaseUrl: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/api/v4
-    baseUrl: https://gitlab-gitlab.apps.{{ cluster_base_domain }}
-    host: gitlab-gitlab.apps.{{ cluster_base_domain }}
+  - apiBaseUrl: https://gitlab-gitlab.{{ cluster_apps_domain }}/api/v4
+    baseUrl: https://gitlab-gitlab.{{ cluster_apps_domain }}
+    host: gitlab-gitlab.{{ cluster_apps_domain }}
     token: {{ gitlab_token }}
 jenkins:
   instances:
-  - apiKey: JENKINS_TOKEN
-    baseUrl: https://jenkins-jenkins.apps.{{ cluster_base_domain }}
+  - apiKey: {{ jenkins_api_token }}
+    baseUrl: https://jenkins-jenkins.{{ cluster_apps_domain }}
     name: default
     username: admin
 kubernetes:
@@ -176,16 +176,16 @@ proxy:
       pathRewrite:
         ^/api/proxy/developer-hub/tech-radar: /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
       secure: false
-      target: https://gitlab-gitlab.apps.{{ cluster_base_domain }}/
+      target: https://gitlab-gitlab.{{ cluster_apps_domain }}/
     /quay/api:
       changeOrigin: true
       headers:
         Authorization: Bearer {{ quay_api_token }}
         X-Requested-With: XMLHttpRequest
       secure: false
-      target: https://quay-4jpk9.apps.{{ cluster_base_domain }}
+      target: https://quay-4jpk9.{{ cluster_apps_domain }}
 quay:
-  uiUrl: https://quay-4jpk9.apps.{{ cluster_base_domain }}
+  uiUrl: https://quay-4jpk9.{{ cluster_apps_domain }}
 scaffolder: null
 signInPage: oauth2Proxy
 techdocs:
@@ -198,7 +198,7 @@ techdocs:
       credentials:
         accessKeyId: minio
         secretAccessKey: {{ cluster_generic_password }}
-      endpoint: https://minio-ic-shared-minio.apps.{{ cluster_base_domain }}
+      endpoint: https://minio-ic-shared-minio.{{ cluster_apps_domain }}
       region: {{ region }}
       s3ForcePathStyle: true
     type: awsS3
