@@ -1,4 +1,8 @@
-.DS_Store
+inventory/**
+ansible/inventory/**
+venv/**
 hacking/
 hack/
 hack.md
+
+.DS_Store
