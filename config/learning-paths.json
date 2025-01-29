@@ -1,0 +1,76 @@
+[
+    {
+      "paths": 6,
+      "minutes": 20,
+      "description": "Learn about k8s API fundamentals and the etcd operator, as well as how to use the Operator SDK with Go and Helm, review Ansible basics, and use Ansible to deploy Kubernetes modules.",
+      "label": "Building Operators on OpenShift",
+      "url": "https://developers.redhat.com/learn/openshift/operators"
+    },
+    {
+      "paths": 3,
+      "minutes": 20,
+      "description": "For the best experience in this learning path, we suggest that you complete the following learning resources in the order shown. When you click on a resource, it will open in a new tab. Keep this page open so you can easily move on to the next resource!",
+      "label": "Configure a Jupyter notebook to use GPUs for AI/ML modeling",
+      "url": "https://developers.redhat.com/learn/openshift-data-science/configure-jupyter-notebook-use-gpus-aiml-modeling"
+    },
+    {
+      "paths": 5,
+      "hours": 2,
+      "description": "Use GitOps and OpenShift Pipelines to implement Kubernetes-native CI/CD, automate and manage app deployment.\r\nDeveloped by Christian Hernandez, Natale Vinto, and Dewan Ahmed",
+      "label": "Develop with GitOps",
+      "url": "https://developers.redhat.com/learn/openshift/develop-gitops"
+    },
+    {
+      "paths": 6,
+      "hours": 1,
+      "minutes": 15,
+      "description": "Learn how to access an OpenShift cluster, manage apps with the odo command-line tool, then try image and source-based deployment techniques.",
+      "label": "Developing on OpenShift",
+      "url": "https://developers.redhat.com/learn/openshift/develop-on-openshift"
+    },
+    {
+      "paths": 2,
+      "minutes": 15,
+      "description": "Poke around the OpenShift web console or command-line interfaces at your own speed in a free-form sandbox environment.",
+      "label": "Exploring OpenShift",
+      "url": "https://developers.redhat.com/learn/openshift/explore-openshift"
+    },
+    {
+      "paths": 13,
+      "hours": 3,
+      "minutes": 40,
+      "description": "Start with the foundations to get hands-on experience creating and deploying applications in Red Hat OpenShift in Red Hat's interactive learning environments. In this learning path, you will learn:\r\n\r\n\u2022 The basic concepts behind OpenShift\r\n\u2022 How to create and deploy applications directly into an OpenShift cluster from source as well as Linux containers\r\n\u2022 How to work with Live Coding to compile and deploy the changes immediately and automatically into OpenShift\r\n\u2022 How to create data-driven applications using a variety of OpenShift data technologies",
+      "label": "Foundations of OpenShift",
+      "url": "https://developers.redhat.com/learn/openshift/foundations-openshift"
+    },
+    {
+      "paths": 11,
+      "hours": 2,
+      "description": "Learn the basics of Red Hat Enterprise Linux, and how to leverage it with tools like Podman, Buildah, and SQL.",
+      "label": "Get started with Red Hat Enterprise Linux",
+      "url": "https://developers.redhat.com/learn/rhel"
+    },
+    {
+      "paths": 3,
+      "minutes": 30,
+      "description": "In this learning path, you will set up options for your Jupyter notebook server,  then explore the MNIST dataset to refine your data. Finally, you will learn how to implement frameworks, layers, and nodes to create your TensorFlow model.",
+      "label": "How to create a TensorFlow model",
+      "url": "https://developers.redhat.com/learn/openshift-data-science/how-create-tensorflow-model"
+    },
+    {
+      "paths": 13,
+      "hours": 3,
+      "minutes": 10,
+      "description": "Learn how to deploy an application on a cluster using Red Hat OpenShift Service on AWS.",
+      "label": "How to deploy an application using Red Hat OpenShift Service on AWS",
+      "url": "https://developers.redhat.com/learn/openshift/how-deploy-application-using-red-hat-openshift-service-aws"
+    },
+    {
+      "paths": 20,
+      "hours": 11,
+      "minutes": 15,
+      "description": "Spend time getting to know your new friend - Kubernetes. Learn more about this open source container orchestration system and make notes on commands, tips, and tricks to bring it to life.",
+      "label": "Kubernetes and friends",
+      "url": "https://developers.redhat.com/devnation/kubernetes-and-friends"
+    }
+  ]

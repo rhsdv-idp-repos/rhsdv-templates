@@ -172,18 +172,11 @@ permission:
   enabled: false
 proxy:
   endpoints:
-    /developer-hub/tech-radar:
-      changeOrigin: true
-      #pathRewrite:
-      #  ^/api/proxy/developer-hub/tech-radar: /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
-      pathRewrite:
-        ^/api/proxy/developer-hub/tech-radar: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_branch }}/config/tech-radar.json
-      secure: false
-      target: https://gitlab-gitlab.{{ cluster_apps_domain }}/
-    
     /developer-hub:
       changeOrigin: true
       pathRewrite:
+        ^/api/proxy/developer-hub/learning-paths: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_branch }}/config/learning-paths.json
+        ^/api/proxy/developer-hub/tech-radar: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_branch }}/config/tech-radar.json
         ^/api/proxy/developer-hub: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_branch }}/config/quick-start.json
       secure: false
       target: https://gitlab-gitlab.{{ cluster_apps_domain }}/
