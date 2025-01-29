@@ -1,12 +1,13 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: rhivos-build-template
-  title: Build RHIVOS Image
-  description: Build the Red Hat In-Vehicle OS
+  name: autosd-container-template
+  title: Build AutoSD Container
+  description: Create a container image based on AutoSD
   tags:
     - automotive
-    - rhivos
+    - autosd
+    - container
 spec:
   owner: automotive
   type: service
@@ -15,78 +16,27 @@ spec:
     - title: Provide Project Information
       required:
         - artifact_id
-        - manifest_name
-        - manifest_location
+        - arch
       properties:
         artifact_id:
           title: Artifact Id
           type: string
-          default: devel-build
+          default: autosd-container-build
           maxLength: 40
           pattern: "^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$"
           description: The unique ID used for creating assets.
-        description:
-          title: Description
-          type: string
-          default: RHIVOS development image
-          description: Help others understand what this RHIVOS build is for.
-        manifest_name:
-          title: Manifest
-          type: string
-          default: devel
-          pattern: "^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$"
-          description: Name of the manifest file
-          ui:help: "Hint: without the .yaml extension"
-        manifest_location:
-          title: Manifest Location
-          type: string
-          default: ./manifests
-          description: Manifest file location
-    
-    - title: Provide RHIVOS Build Information
-      required:
-        - distro
-        - arch
-        - target
-        - mode
-        - export_format
-      properties:
-        distro:
-          title: Distro
-          type: string
-          default: autosd
-          enum:
-            - autosd
-            - cs9
         arch:
           title: Architecture
           type: string
-          default: aarch64
+          default: x86_64
           enum:
             - aarch64
             - x86_64
-        target:
-          title: Target
+        description:
+          title: Description
           type: string
-          default: rpi4
-          enum:
-            - rpi4
-            - qemu
-        mode:
-          title: Package Mode
-          type: string
-          default: package
-          enum:
-            - package
-            - image
-        export_format:
-          title: Export Format
-          type: string
-          default: image
-          enum:
-            - image
-            - qcow2
-            - container
+          default: AutoSD container image build
+          description: Help others understand what this container is for.
 
     - title: Provide Build Environment Information
       required:
@@ -183,19 +133,13 @@ spec:
           - .github/workflows/*
         values:
           artifact_id: ${{ parameters.artifact_id }}
+          arch: ${{ parameters.arch }}
           description: ${{ parameters.description }}
           namespace: ${{ parameters.artifact_id }}-dev
           owner: ${{ user.entity.metadata.name }}
           cluster: .apps.${{ parameters.base_domain }}
           host: ${{ parameters.repo.host }}
           destination: ${{ parameters.repo.owner }}/${{ parameters.artifact_id }}
-          manifest_name: ${{ parameters.manifest_name }}
-          manifest_location: ${{ parameters.manifest_location }}
-          distro: ${{ parameters.distro }}
-          arch: ${{ parameters.arch }}
-          target: ${{ parameters.target }}
-          mode: ${{ parameters.mode }}
-          export_format: ${{ parameters.export_format }}
           verify_commits: "${{ parameters.repo.verify_commits }}"
           quay_destination: ${{ parameters.image_organization}}/${{ parameters.artifact_id }}
 
@@ -222,15 +166,9 @@ spec:
         copyWithoutTemplating: []
         values:
           artifact_id: ${{ parameters.artifact_id }}
-          description: ${{ parameters.description }}
-          manifest_name: ${{ parameters.manifest_name }}
-          manifest_location: ${{ parameters.manifest_location }}
-          distro: ${{ parameters.distro }}
           arch: ${{ parameters.arch }}
-          target: ${{ parameters.target }}
-          mode: ${{ parameters.mode }}
-          export_format: ${{ parameters.export_format }}
-
+          description: ${{ parameters.description }}
+          
           destination: "https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.artifact_id}}-gitops.git"
           source_repository: "https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.artifact_id}}.git"
           repository_name: ${{parameters.artifact_id}}
@@ -245,7 +183,7 @@ spec:
 
           cluster: .apps.${{ parameters.base_domain }}
           user: ${{ user.entity.metadata.name }}
-          deployment_name: rhivos-build-template
+          deployment_name: autosd-container-template
 
           verify_commits: ${{ parameters.repo.verify_commits }}
 

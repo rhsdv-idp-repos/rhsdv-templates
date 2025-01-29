@@ -2,6 +2,7 @@
 Collection of Automotive Software Templates for Red Hat Developer Hub
 
 ## References
+A collection of links to documentation and repositories, used for reference.
 
 ### Documentation
 
@@ -13,3 +14,4 @@ Collection of Automotive Software Templates for Red Hat Developer Hub
 ### Repositories
 
 * https://gitlab.com/fedora/sigs/robotics/infra/infra-ci-operator
+* https://github.com/redhat-developer/red-hat-developer-hub-customization-provider

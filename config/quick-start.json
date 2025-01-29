@@ -1,17 +1,17 @@
 [
     {
       "title": "COMMUNITY",
-      "isExpanded": false,
+      "isExpanded": true,
       "links": [
         {
           "iconUrl": "/homepage/icons/icons8/web.png",
-          "label": "Janus IDP",
-          "url": "https://janus-idp.io/community"
+          "label": "CentOS Automotive SIG",
+          "url": "https://sigs.centos.org/automotive/"
         },
         {
           "iconUrl": "/homepage/icons/icons8/github.png",
-          "label": "Janus GitHub",
-          "url": "https://github.com/orgs/janus-idp"
+          "label": "CentOS Automotive GitLab",
+          "url": "https://gitlab.com/CentOS/automotive"
         }
       ]
     },
@@ -28,7 +28,7 @@
     },
     {
       "title": "CI/CD TOOLS",
-      "isExpanded": true,
+      "isExpanded": false,
       "links": [
         {
           "iconUrl": "/homepage/icons/argo-icon-color.svg",
