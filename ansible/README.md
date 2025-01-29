@@ -1,20 +1,24 @@
 # README
+Playbooks to patch the Red Hat Developer Hub installation, provided by the [Trusted Application Pipeline](https://catalog.demo.redhat.com/catalog?item=babylon-catalog-prod/enterprise.redhat-tap-demo.prod&utm_source=webapp&utm_medium=share-link) demo from the [Red Hat Demo Platform](https://catalog.demo.redhat.com).
+
+## Pre-requisites
+
+* Ansible installed on the local development environment
+* A running instance of the [Trusted Application Pipeline](https://catalog.demo.redhat.com/catalog?item=babylon-catalog-prod/enterprise.redhat-tap-demo.prod&utm_source=webapp&utm_medium=share-link) demo
+* Admin login to the Red Hat OpenShift cluster
+
+## Preparation
+
+1) Make a copies of files `ansible/inventory/main.yml.example` and  `ansible/inventory/platform.yml.example`.
+2) Rename the files to `ansible/inventory/main.yml` and  `ansible/inventory/platform.yml`.
+3) Review both files and change values, depending on your environment and requirements.
+
+## Patching
+
+Run the following playbook:
 
 ```shell
-python -m venv venv
-source venv/bin/activate
+cd ansible
+
+ansible-playbook -i inventory playbooks/patch.yml
 ```
-
-# disable the GitOps syncing
-oc patch apps backstage-gitops -n openshift-gitops --type=json -p '[{"op": "remove", "path": "/spec/syncPolicy/automated"}]'
-oc patch apps backstage -n openshift-gitops --type=json -p '[{"op": "remove", "path": "/spec/syncPolicy/automated"}]'
-
-# parch the configmap
-
-# scale the pod to 0/1
-oc patch deployment backstage-developer-hub -n backstage --subresource='scale' --type='merge' -p '{"spec":{"replicas":1}}'
-
-# delete the backstage pod
-oc delete pod `oc get pods -n backstage | awk '{print $1}' | grep backstage-developer-hub` -n backstage
-
-

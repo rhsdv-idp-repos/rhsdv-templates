@@ -1,0 +1,13 @@
+all:
+  vars:
+    # set the following RHDP instance specific variables
+    cluster_generic_password: "XXX" # get this from the RHPD Demo Access Details overview
+
+    # infrastructure variables
+    region: "us-east-2"  # get this from the RHPD Demo configuration screen
+
+    # set the following to control the install/uninstall process
+    patch_backstage: true
+    install_arm_nodes: false
+    
+  
