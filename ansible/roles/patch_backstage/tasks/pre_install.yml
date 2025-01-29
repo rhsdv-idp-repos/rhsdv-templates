@@ -1,7 +1,7 @@
 # Implement your pre-install deployment tasks here
 # -------------------------------------------------
 
-- name: Determine cluster base domain
+- name: determine cluster base domain
   k8s_info:
     api_version: config.openshift.io/v1
     kind: DNS
@@ -9,11 +9,11 @@
   register: r_dns_config
   failed_when: r_dns_config.resources | length < 1
 
-- name: Register cluster base domain
+- name: register cluster base domain
   set_fact:
     cluster_base_domain: "{{ r_dns_config.resources[0].spec.baseDomain }}"
 
-- name: Determine cluster apps domain
+- name: determine cluster apps domain
   k8s_info:
     api_version: config.openshift.io/v1
     kind: Ingress
@@ -21,16 +21,20 @@
   register: r_ingress_config
   failed_when: r_ingress_config.resources | length < 1
 
-- name: Register cluster apps domain
+- name: register cluster apps domain
   set_fact:
     cluster_apps_domain: "{{ r_ingress_config.resources[0].spec.domain }}"
 
-- name: Retrieve GitLab private token
+- name: get GitLab host
+  ansible.builtin.set_fact:
+    gitlab_host: "gitlab-{{ gitlab_namespace }}.{{r_ingress_config.resources[0].spec.domain }}"
+
+- name: retrieve GitLab private token
   kubernetes.core.k8s_info:
     api_version: v1
     kind: Secret
     name: root-user-personal-token
-    namespace: gitlab
+    namespace: "{{ gitlab_namespace }}"
   register: r_root_token
   retries: 120
   delay: 10
@@ -43,11 +47,11 @@
   - r_root_token.resources[0].data.token is defined
   - r_root_token.resources[0].data.token | length > 0
 
-- name: Decode GitLab token
+- name: decode GitLab token
   ansible.builtin.set_fact:
     gitlab_token: "{{ r_root_token.resources[0].data.token | b64decode }}"
 
-- name: Retrieve quay admin token
+- name: retrieve quay admin token
   kubernetes.core.k8s_info:
     api_version: v1
     kind: Secret
@@ -62,16 +66,16 @@
   - r_quay_token.resources | length > 0
   - r_quay_token.resources[0] is defined
 
-- name: Decode quay admin token
+- name: decode quay admin token
   ansible.builtin.set_fact:
     quay_api_token: "{{ r_quay_token.resources[0].data.token | b64decode }}"
 
-- name: Get default token
+- name: get default token
   ansible.builtin.shell: >-
     set -o pipefail && oc get secret $(oc get secret -n default | grep default-token | awk '{print $1}') -n default -o json | jq -r '.data.token'
   register: r_default_token
 
-- name: Decode default token
+- name: decode default token
   ansible.builtin.set_fact:
     service_account_token: "{{ r_default_token.stdout | b64decode }}"
 

@@ -10,5 +10,5 @@
     - name: Update/patch the Developer Hub installation
       include_role:
         name: ../roles/patch_backstage
-      when: update_backstage
+      when: patch_backstage
 

@@ -83,17 +83,17 @@ catalog:
       - Template
     target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/trusted-application-pipeline-templates/blob/main/catalogs.yaml
     type: url
-  #- rules:
-  #  - allow:
-  #      - Template
-  #  target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/rhsdv-templates/blob/main/templates.yaml
-  #  type: url
-  #- rules:
-  #  - allow:
-  #      - Group
-  #      - User
-  #  target: https://gitlab-gitlab.{{ cluster_apps_domain }}/rhdh/rhsdv-templates/blob/main/org.yaml
-  #  type: url
+  - rules:
+    - allow:
+        - Template
+    target: https://gitlab-gitlab.{{ cluster_apps_domain }}/{{ templates_repo_group }}/{{ templates_repo_name }}/blob/{{ templates_repo_branch }}/templates.yaml
+    type: url
+  - rules:
+    - allow:
+        - Group
+        - User
+    target: https://gitlab-gitlab.{{ cluster_apps_domain }}/{{ templates_repo_group }}/{{ templates_repo_name }}/blob/{{ templates_repo_branch }}/org.yaml
+    type: url
   providers:
     gitlab:
       selfHosted:
