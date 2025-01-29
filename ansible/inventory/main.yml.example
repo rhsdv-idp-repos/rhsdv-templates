@@ -4,6 +4,7 @@ all:
     cluster_generic_password: "XXX" # get this from the RHPD Demo Access Details overview
 
     # infrastructure variables
+    cluster_guid: "5gvk2"   # get this from the RHPD Demo URL
     region: "us-east-2"  # get this from the RHPD Demo configuration screen
 
     # set the following to control the install/uninstall process

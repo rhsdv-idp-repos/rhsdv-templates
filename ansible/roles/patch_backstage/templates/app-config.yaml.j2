@@ -1,4 +1,5 @@
 app:
+  title: {{ rhdh_title }}
   baseUrl: https://backstage-developer-hub-backstage.{{ cluster_apps_domain }}
 argocd:
   appLocatorMethods:
@@ -171,21 +172,31 @@ permission:
   enabled: false
 proxy:
   endpoints:
+    /developer-hub/tech-radar:
+      changeOrigin: true
+      #pathRewrite:
+      #  ^/api/proxy/developer-hub/tech-radar: /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
+      pathRewrite:
+        ^/api/proxy/developer-hub/tech-radar: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_name }}/config/tech-radar.json
+      secure: false
+      target: https://gitlab-gitlab.{{ cluster_apps_domain }}/
+    
     /developer-hub:
       changeOrigin: true
       pathRewrite:
-        ^/api/proxy/developer-hub/tech-radar: /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
+        ^/api/proxy/developer-hub: /{{ templates_repo_group }}/{{ templates_repo_name }}/-/raw/{{ templates_repo_name }}/config/quick-start.json
       secure: false
       target: https://gitlab-gitlab.{{ cluster_apps_domain }}/
+    
     /quay/api:
       changeOrigin: true
       headers:
         Authorization: Bearer {{ quay_api_token }}
         X-Requested-With: XMLHttpRequest
       secure: false
-      target: https://quay-4jpk9.{{ cluster_apps_domain }}
+      target: https://quay-{{ cluster_guid }}.{{ cluster_apps_domain }}
 quay:
-  uiUrl: https://quay-4jpk9.{{ cluster_apps_domain }}
+  uiUrl: https://quay-{{ cluster_guid }}.{{ cluster_apps_domain }}
 scaffolder: null
 signInPage: oauth2Proxy
 techdocs:

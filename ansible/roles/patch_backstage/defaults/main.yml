@@ -5,10 +5,13 @@ templates_repo_name: "rhsdv-templates"
 templates_repo_url: "https://github.com/rhsdv-idp-repos/rhsdv-templates"
 templates_repo_branch: "main"
 
+# Developer Hub customization
+rhdh_title: "Red Hat Developer Hub - Automotive"
+
 # placeholder for the following variables
 jenkins_api_token: "JENKINS_TOKEN"
 
-# from Trusted Application Pipeline, without changes
+# defaults from Trusted Application Pipeline roles, without changes
 gitlab_root_user: root
 gitlab_root_password: openshift
 gitlab_namespace: gitlab

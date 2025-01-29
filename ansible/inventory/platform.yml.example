@@ -1,7 +1,6 @@
 all:
   vars:
     # set the following RHDP instance specific variables
-    cluster_guid: "5gvk2"   # get this from the RHPD Demo URL
     cluster_instance: "5gvk2-q6r7p" # get this from one of the OpenShift MachineSets
 
     # "arm" worker instance definition
