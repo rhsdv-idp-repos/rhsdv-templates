@@ -4,9 +4,9 @@
   debug:
     msg: "Running installation tasks for {{ role_name }}"
 
-- name: clone automotive repo
+- name: import automotive templates into gitlab
   include_tasks:
-    file: ./clone_repo.yml
+    file: ./import_repo.yml
     apply:
       become: "{{ become_override | bool }}"
 

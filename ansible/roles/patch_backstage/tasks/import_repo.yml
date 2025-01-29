@@ -33,7 +33,7 @@
     status_code: 201
   register: r_project
   retries: 5
-  delay: 10
+  delay: 30
 
 - name: register project id
   set_fact:
@@ -48,50 +48,10 @@
       PRIVATE-TOKEN: "{{ gitlab_token }}"
     validate_certs: false
     return_content: true
-  register: import_status
-  until: import_status.json.import_status == "finished"
+  register: r_import_status
+  until: r_import_status.json.import_status == "finished"
   retries: 30
-  delay: 10
-
-
-#- name: import remote repository
-#  uri:
-#    url: https://{{ gitlab_host }}/api/v4/projects/{{ project_id }}/repository/import
-#    method: POST
-#    body_format: form-urlencoded
-#    body:
-#      repository_url: "{{ templates_repo_url }}.git"
-#    headers:
-#      PRIVATE-TOKEN: "{{ gitlab_token }}"
-#    validate_certs: false
-#    #status_code: 201
-#  register: r_import
-  #retries: 5
-  #delay: 10
-
-#- name: debug
-#  ansible.builtin.debug:
-#    msg: "{{ r_import }}"
-
-- name: enable repository mirroring
-  uri:
-    url: https://{{ gitlab_host }}/api/v4/projects/{{ project_id }}/mirror/pull
-    method: PUT
-    body_format: form-urlencoded
-    body:
-      enabled: "true"
-      url: "{{ templates_repo_url }}.git"
-    headers:
-      PRIVATE-TOKEN: "{{ gitlab_token }}"
-    validate_certs: false
-    #status_code: 201
-  register: r_mirroring
-  #retries: 5
-  #delay: 10
-
-- name: debug
-  ansible.builtin.debug:
-    msg: "{{ r_mirroring }}"
+  delay: 30
 
 # Leave these as the last tasks in the playbook
 - name: clone_repo tasks complete

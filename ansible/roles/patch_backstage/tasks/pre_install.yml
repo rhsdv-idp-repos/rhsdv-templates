@@ -25,11 +25,11 @@
   set_fact:
     cluster_apps_domain: "{{ r_ingress_config.resources[0].spec.domain }}"
 
-- name: get GitLab host
+- name: get gitlab host
   ansible.builtin.set_fact:
     gitlab_host: "gitlab-{{ gitlab_namespace }}.{{r_ingress_config.resources[0].spec.domain }}"
 
-- name: retrieve GitLab private token
+- name: retrieve gitlab private token
   kubernetes.core.k8s_info:
     api_version: v1
     kind: Secret
@@ -47,7 +47,7 @@
   - r_root_token.resources[0].data.token is defined
   - r_root_token.resources[0].data.token | length > 0
 
-- name: decode GitLab token
+- name: register gitlab token
   ansible.builtin.set_fact:
     gitlab_token: "{{ r_root_token.resources[0].data.token | b64decode }}"
 
@@ -66,7 +66,7 @@
   - r_quay_token.resources | length > 0
   - r_quay_token.resources[0] is defined
 
-- name: decode quay admin token
+- name: register quay admin token
   ansible.builtin.set_fact:
     quay_api_token: "{{ r_quay_token.resources[0].data.token | b64decode }}"
 
@@ -75,7 +75,7 @@
     set -o pipefail && oc get secret $(oc get secret -n default | grep default-token | awk '{print $1}') -n default -o json | jq -r '.data.token'
   register: r_default_token
 
-- name: decode default token
+- name: register default token
   ansible.builtin.set_fact:
     service_account_token: "{{ r_default_token.stdout | b64decode }}"
 

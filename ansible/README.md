@@ -12,6 +12,7 @@ Playbooks to patch the Red Hat Developer Hub installation, provided by the [Trus
 1) Make a copies of files `ansible/inventory/main.yml.example` and  `ansible/inventory/platform.yml.example`.
 2) Rename the files to `ansible/inventory/main.yml` and  `ansible/inventory/platform.yml`.
 3) Review both files and change values, depending on your environment and requirements.
+4) Get the login command from the OpenShift Console. Make sure you are looged in as an admin user.
 
 ## Patching
 
